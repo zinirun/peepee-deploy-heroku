@@ -1,3 +1,5 @@
+numpy
+matplotlib
 click==6.7
 Flask==0.12.2
 gunicorn==19.7.1
@@ -5,7 +7,5 @@ itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 Werkzeug==0.12.2
-opencv-python==2.4.13
+opencv-python<3.2
 scikit-learn
-numpy
-matplotlib

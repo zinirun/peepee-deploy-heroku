@@ -20,7 +20,7 @@ def upload_file():
         file = request.files['file']
         # 확장자 이미지파일인 경우
         if file and allowed_file(file.filename):
-            file.save('uploads/' + 'image.' + 'jpg')
+            file.save('tmp/' + 'image.' + 'jpg')
             return redirect(url_for('run_anal'))
         # 확장자 이미지파일 아닐 경우
         return render_template('index.html', data="이미지 파일만 업로드하세요.")
@@ -35,7 +35,7 @@ def allowed_file(filename):
 
 # CV2 처리
 def load_n_crop():
-    img_bgr = cv2.imread("uploads/image.jpg", cv2.IMREAD_COLOR)
+    img_bgr = cv2.imread("tmp/image.jpg", cv2.IMREAD_COLOR)
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
     # crop the image
     x, y, channel = img_bgr.shape

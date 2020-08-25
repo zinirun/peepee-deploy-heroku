@@ -6,6 +6,7 @@ from flask import Flask, url_for, render_template, request, redirect
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'JPG', 'JPEG', 'PNG', 'GIF', 'BMP'])
 app = Flask(__name__)
 
+
 # 업로드 HTML 렌더링
 @app.route('/')
 def upload():
@@ -17,21 +18,21 @@ def upload():
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
-        #확장자 이미지파일인 경우
+        # 확장자 이미지파일인 경우
         if file and allowed_file(file.filename):
             file.save('uploads/' + 'image.' + 'jpg')
             return redirect(url_for('run_anal'))
-        #확장자 이미지파일 아닐 경우
+        # 확장자 이미지파일 아닐 경우
         return render_template('index.html', data="이미지 파일만 업로드하세요.")
 
 
-#파일 확장자 검사
+# 파일 확장자 검사
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
-#CV2 처리
+# CV2 처리
 def load_n_crop():
     img_bgr = cv2.imread("uploads/image.jpg", cv2.IMREAD_COLOR)
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
@@ -51,7 +52,7 @@ def load_n_crop():
     return col
 
 
-#rgb에 따른 소변유형 분류
+# rgb에 따른 소변유형 분류
 def calc_type(color):
     r, g, b = color
     result = 0
@@ -89,11 +90,12 @@ def calc_type(color):
     return result
 
 
-#분석 실행
+# 분석 실행
 @app.route('/mod')
 def run_anal():
     result = calc_type(load_n_crop())
     return render_template('result.html', peeValue=result)
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     app.run(debug=True)

@@ -99,4 +99,4 @@ def run_anal():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

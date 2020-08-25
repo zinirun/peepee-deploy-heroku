@@ -1,1 +1,1 @@
-web: gunicorn prototype:app
+web: gunicorn peepee:app

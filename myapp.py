@@ -24,7 +24,7 @@ def upload_file():
             return redirect(url_for('run_anal'))
         # 확장자 이미지파일 아닐 경우
         return render_template('index.html', data="이미지 파일만 업로드하세요.")
-    else: return
+    return render_template('index.html', data="올바른 방식으로 접근하세요.")
 
 
 # 파일 확장자 검사

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: euc-kr -*-
 import cv2
 from sklearn.cluster import KMeans
 from flask import Flask, url_for, render_template, request, redirect
@@ -7,33 +7,33 @@ ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'png', 'gif', 'bmp', 'JPG', 'JPEG', 'PN
 app = Flask(__name__)
 
 
-# ì—…ë¡œë“œ HTML ë Œë”ë§
+# ¾÷·Îµå HTML ·»´õ¸µ
 @app.route('/')
 def upload():
     return render_template('index.html')
 
 
-# íŒŒì¼ ì—…ë¡œë“œ ì²˜ë¦¬
+# ÆÄÀÏ ¾÷·Îµå Ã³¸®
 @app.route('/fileUpload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']
-        # í™•ì¥ì ì´ë¯¸ì§€íŒŒì¼ì¸ ê²½ìš°
+        # È®ÀåÀÚ ÀÌ¹ÌÁöÆÄÀÏÀÎ °æ¿ì
         if file and allowed_file(file.filename):
             file.save('uploads/' + 'image.' + 'jpg')
             return redirect(url_for('run_anal'))
-        # í™•ì¥ì ì´ë¯¸ì§€íŒŒì¼ ì•„ë‹ ê²½ìš°
-        return render_template('index.html', data="ì´ë¯¸ì§€ íŒŒì¼ë§Œ ì—…ë¡œë“œí•˜ì„¸ìš”.")
-    return render_template('index.html', data="ì˜¬ë°”ë¥¸ ë°©ì‹ìœ¼ë¡œ ì ‘ê·¼í•˜ì„¸ìš”.")
+        # È®ÀåÀÚ ÀÌ¹ÌÁöÆÄÀÏ ¾Æ´Ò °æ¿ì
+        return render_template('index.html', data="ÀÌ¹ÌÁö ÆÄÀÏ¸¸ ¾÷·ÎµåÇÏ¼¼¿ä.")
+    return render_template('index.html', data="Bad Access")
 
 
-# íŒŒì¼ í™•ì¥ì ê²€ì‚¬
+# ÆÄÀÏ È®ÀåÀÚ °Ë»ç
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
-# CV2 ì²˜ë¦¬
+# CV2 Ã³¸®
 def load_n_crop():
     img_bgr = cv2.imread("uploads/image.jpg", cv2.IMREAD_COLOR)
     img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
@@ -53,7 +53,7 @@ def load_n_crop():
     return col
 
 
-# rgbì— ë”°ë¥¸ ì†Œë³€ìœ í˜• ë¶„ë¥˜
+# rgb¿¡ µû¸¥ ¼Òº¯À¯Çü ºĞ·ù
 def calc_type(color):
     r, g, b = color
     result = 0
@@ -91,7 +91,7 @@ def calc_type(color):
     return result
 
 
-# ë¶„ì„ ì‹¤í–‰
+# ºĞ¼® ½ÇÇà
 @app.route('/mod')
 def run_anal():
     result = calc_type(load_n_crop())

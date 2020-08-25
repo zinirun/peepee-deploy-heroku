@@ -1,4 +1,4 @@
-# -*- coding: euc-kr -*-
+# -*- coding: utf-8 -*-
 from flask_frozen import Freezer
 from myapp import app
 

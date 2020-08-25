@@ -14,7 +14,7 @@ def upload():
 
 
 # 파일 업로드 처리
-@app.route('/fileUpload', methods=['GET', 'POST'])
+@app.route('/fileUpload', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         file = request.files['file']

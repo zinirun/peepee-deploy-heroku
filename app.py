@@ -94,3 +94,6 @@ def calc_type(color):
 def run_anal():
     result = calc_type(load_n_crop())
     return render_template('result.html', peeValue=result)
+
+if __name__ == "__main__":
+    app.run(debug=True)

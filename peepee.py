@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import cv2
 from sklearn.cluster import KMeans
 from flask import Flask, url_for, render_template, request, redirect
